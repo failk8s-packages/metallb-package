@@ -1,3 +1,5 @@
 #@data/values
 ---
 #! Add your values here
+namespace: metallb-system
+ip_range: REPLACE_ME
