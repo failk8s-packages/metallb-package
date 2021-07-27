@@ -4,6 +4,6 @@
         "name": "metallb",
         "domain": "tkgdev.failk8s.com",
         "displayName": "MetalLB",
-        "version": "1.0.0"
+        "version": "develop"
     }
 }
