@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: metallb-config
+  name: metallb
   namespace: metallb-package
 stringData:
   values.yml: null

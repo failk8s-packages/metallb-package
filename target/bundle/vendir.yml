@@ -1,0 +1,16 @@
+---
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.18.0
+directories:
+- path: config/upstream
+  contents:
+  - path: .
+    git:
+      url: https://github.com/metallb/metallb
+      ref: v0.10.2
+      disableAutoChecksumValidation: true
+    includePaths:
+    - manifests/namespace.yaml
+    - manifests/metallb.yaml
+    - manifests/example-layer2-config.yaml

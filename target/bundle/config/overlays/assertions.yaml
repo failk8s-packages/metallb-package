@@ -1,0 +1,9 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:assert", "assert")
+
+
+#@ if data.values.ip_range:
+#@   data.values.ip_range!="REPLACE_ME" or assert.fail("data.values.ip_range can not be empty or REPLACE_ME")
+#@ else:
+#@   assert.fail("data.values.ip_range can not be empty or REPLACE_ME")
+#@ end
