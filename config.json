@@ -4,7 +4,7 @@
         "name": "metallb",
         "domain": "dev.failk8s.com",
         "displayName": "MetalLB",
-        "version": "develop"
+        "version": "0.10.2"
     },
     "packages": []
 }
