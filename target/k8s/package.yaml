@@ -1,27 +1,16 @@
----
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  annotations:
-    kbld.k14s.io/images: |
-      - origins:
-        - resolved:
-            tag: 0.10.2
-            url: quay.io/failk8s/metallb-package:0.10.2
-        url: quay.io/failk8s/metallb-package@sha256:f7cbe55ca24a9ed0323b0cb40d4def07115b647be8bb6f58826d841c6c14eddf
-  name: metallb.dev.failk8s.com.0.10.2
+  name: metallb.dev.failk8s.com.0.0.0+develop
   namespace: kapp-controller-packaging-global
 spec:
   refName: metallb.dev.failk8s.com
+  version: 0.0.0+develop
   template:
     spec:
-      deploy:
-      - kapp:
-          rawOptions:
-          - --wait-timeout=5m
       fetch:
       - imgpkgBundle:
-          image: quay.io/failk8s/metallb-package@sha256:f7cbe55ca24a9ed0323b0cb40d4def07115b647be8bb6f58826d841c6c14eddf
+          image: quay.io/failk8s/metallb-package:develop
       template:
       - ytt:
           paths:
@@ -30,4 +19,7 @@ spec:
           paths:
           - '-'
           - .imgpkg/images.yml
-  version: 0.10.2
+      deploy:
+      - kapp:
+          rawOptions:
+          - --wait-timeout=5m
