@@ -6,7 +6,7 @@
 metadata:
   name: #@ data.values.namespace
 
-#@overlay/match by=overlay.subset({"metadata": {"namespace": "metallb-system"}}), expects=13
+#@overlay/match by=overlay.subset({"metadata": {"namespace": "metallb-system"}}), expects=11
 ---
 metadata:
   namespace: #@ data.values.namespace
@@ -14,6 +14,6 @@ metadata:
 #@overlay/match by=overlay.subset({"kind":"ClusterRoleBinding"}), expects=2
 ---
 subjects:
-#@overlay/match by=overlay.subset({"namespace": "metallb-system"})
-- kind: ServiceAccount
-  namespace: #@ data.values.namespace
+  #@overlay/match by=overlay.subset({"namespace": "metallb-system"})
+  - kind: ServiceAccount
+    namespace: #@ data.values.namespace
