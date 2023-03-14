@@ -6,10 +6,17 @@
 metadata:
   name: #@ data.values.namespace
 
-#@overlay/match by=overlay.subset({"metadata": {"namespace": "metallb-system"}}), expects=11
+#@overlay/match by=overlay.subset({"metadata": {"namespace": "metallb-system"}}), expects=12
 ---
 metadata:
   namespace: #@ data.values.namespace
+
+#@overlay/match by=overlay.subset({"kind":"RoleBinding"}), expects=2
+---
+subjects:
+  #@overlay/match by=overlay.subset({"namespace": "metallb-system"})
+  - kind: ServiceAccount
+    namespace: #@ data.values.namespace
 
 #@overlay/match by=overlay.subset({"kind":"ClusterRoleBinding"}), expects=2
 ---
@@ -17,3 +24,22 @@ subjects:
   #@overlay/match by=overlay.subset({"namespace": "metallb-system"})
   - kind: ServiceAccount
     namespace: #@ data.values.namespace
+
+#@overlay/match by=overlay.subset({"kind":"ValidatingWebhookConfiguration"})
+---
+webhooks:
+  #@overlay/match by=overlay.all,expects=7
+  - admissionReviewVersions:
+    clientConfig:
+      service:
+        namespace: #@ data.values.namespace
+
+#@overlay/match by=overlay.subset({"kind":"CustomResourceDefinition"}), expects=7
+---
+spec:
+  #@overlay/match when=1
+  conversion:
+    webhook:
+      clientConfig:
+        service:
+          namespace: #@ data.values.namespace

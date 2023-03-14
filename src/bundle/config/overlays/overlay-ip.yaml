@@ -1,13 +1,9 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:overlay", "overlay")
 
-#@overlay/match by=overlay.subset({"kind":"ConfigMap", "metadata": {"name": "config"}})
+#@overlay/match by=overlay.subset({"kind":"IPAddressPool", "metadata": {"name": "first-pool"}})
 ---
-data:
-  #@yaml/text-templated-strings
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - (@= data.values.ip_range @)
+spec:
+  #@overlay/replace
+  addresses:
+    -  #@ data.values.ip_range
