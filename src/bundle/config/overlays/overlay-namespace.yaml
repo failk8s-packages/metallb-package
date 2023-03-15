@@ -28,9 +28,8 @@ subjects:
 #@overlay/match by=overlay.subset({"kind":"ValidatingWebhookConfiguration"})
 ---
 webhooks:
-  #@overlay/match by=overlay.all,expects=7
-  - admissionReviewVersions:
-    clientConfig:
+  #@overlay/match by=overlay.all, expects=7
+  - clientConfig:
       service:
         namespace: #@ data.values.namespace
 
