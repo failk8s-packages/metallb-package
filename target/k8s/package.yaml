@@ -1,26 +1,15 @@
----
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  annotations:
-    kbld.k14s.io/images: |
-      - origins:
-        - resolved:
-            tag: 0.13.9
-            url: quay.io/failk8s/metallb-package:0.13.9
-        url: quay.io/failk8s/metallb-package@sha256:74bd6e70a587819c0c83ac6e100b087972baa7e44687a6d88112efee239f407e
-  name: metallb.dev.failk8s.com.0.13.9
+  name: metallb.dev.failk8s.com.0.0.0+develop
 spec:
   refName: metallb.dev.failk8s.com
+  version: 0.0.0+develop
   template:
     spec:
-      deploy:
-      - kapp:
-          rawOptions:
-          - --wait-timeout=5m
       fetch:
       - imgpkgBundle:
-          image: quay.io/failk8s/metallb-package@sha256:74bd6e70a587819c0c83ac6e100b087972baa7e44687a6d88112efee239f407e
+          image: quay.io/failk8s/metallb-package:develop
       template:
       - ytt:
           paths:
@@ -29,4 +18,7 @@ spec:
           paths:
           - '-'
           - .imgpkg/images.yml
-  version: 0.13.9
+      deploy:
+      - kapp:
+          rawOptions:
+          - --wait-timeout=5m
